@@ -230,17 +230,19 @@
                 }
 
                 const fetchSystemHistory = async () => {
-                    try {
-                        const res = await fetch(`${BACKEND_URL}/api/briefings`)
-                        historicalRecords.value = await res.json()
-                    } catch (e) {
-                        console.log("Server unreachable on initialization check.")
-                    }
-                }
-
-                onMounted(() => {
-                    fetchSystemHistory()
-                })
+    try {
+        const res = await fetch(`${BACKEND_URL}/api/briefings`)
+        if (res.ok) {
+            historicalRecords.value = await res.json()
+        } else {
+            historicalRecords.value = []
+        }
+    } catch (e) {
+        console.log("Server unreachable on initialization check.")
+        historicalRecords.value = [] // Safety baseline to prevent Vue crash
+    }
+}
+)
 
                 return {
                     fileField,

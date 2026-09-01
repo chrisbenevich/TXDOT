@@ -47,6 +47,10 @@ def init_db():
 def serve_frontend():
     """Serves the index.html landing panel document directly via the active server port."""
     return send_file('index.html')
+@app.route('/vue.global.js')
+def serve_vue_library():
+    """Delivers the local Vue framework engine file to the browser interface."""
+    return send_file('vue.global.js')
 @app.route('/api/upload', methods=['POST', 'OPTIONS'])
 def upload_notes():
     """Processes incoming data packets and pushes source documents to SQLite."""
