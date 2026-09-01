@@ -1,13 +1,16 @@
 import os
 import sqlite3
 from flask import Flask, request, jsonify, send_file
+from flask_cors import CORS
 import ollama
 
 app = Flask(__name__)
-DB_FILE = "grounded.db"
+# Enable CORS globally across all route variations to allow cross-origin communication
+CORS(app)
+DB_FILE = "sqlite.db"
 
 def init_db():
-    """Automatically creates the SQLite database and required tables if they do not exist."""
+    """Automatically establishes the local SQLite storage tables upon execution."""
     with sqlite3.connect(DB_FILE) as conn:
         cursor = conn.cursor()
         # Table to store uploaded source document notes
@@ -40,9 +43,16 @@ def init_db():
         ''')
         conn.commit()
 
-@app.route('/api/upload', methods=['POST'])
+@app.route('/')
+def serve_frontend():
+    """Serves the index.html landing panel document directly via the active server port."""
+    return send_file('index.html')
+@app.route('/api/upload', methods=['POST', 'OPTIONS'])
 def upload_notes():
-    """Handles multiple text file uploads from the Vue user interface."""
+    """Processes incoming data packets and pushes source documents to SQLite."""
+    if request.method == 'OPTIONS':
+        return jsonify({'status': 'CORS preflight ok'}), 200
+        
     if 'files' not in request.files:
         return jsonify({'error': 'No files provided in request'}), 400
         
@@ -62,11 +72,9 @@ def upload_notes():
         conn.commit()
         
     return jsonify({'message': f'Successfully ingested {saved_count} source documents.'}), 200
-# Continuation of app.py - Append this directly below the previous code block
-
 @app.route('/api/generate', methods=['POST'])
 def generate_briefing():
-    """Pulls all stored source documents, queries Ollama, and strictly categorizes output."""
+    """Processes database inputs, executes Ollama parsing, and screens for orphan claims."""
     with sqlite3.connect(DB_FILE) as conn:
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
@@ -75,12 +83,10 @@ def generate_briefing():
     if not notes:
         return jsonify({'error': 'No source notes found in database. Upload files first.'}), 400
         
-    # Aggregate source documents into a single analytical context string
     aggregated_context = ""
     for note in notes:
         aggregated_context += f"--- START SOURCE FILE: {note['filename']} ---\n{note['content']}\n--- END SOURCE FILE ---\n\n"
         
-    # Prompt engineering designed to strictly enforce factual accountability and expose fabrications
     system_prompt = (
         "You are an ironclad systems analyst validation system. Your task is to analyze the source notes provided "
         "and generate a cohesive technical briefing of exactly 5 to 8 bullet points.\n\n"
@@ -114,12 +120,10 @@ def generate_briefing():
                 if not line.strip():
                     continue
                 
-                # Default safety values if parsing fails
                 status = 'invented'
                 citation_source = None
                 clean_text = line
                 
-                # Algorithmic string classification logic independent of LLM wrapper
                 if line.startswith('[CITED:'):
                     status = 'cited'
                     end_bracket_idx = line.find(']')
@@ -146,18 +150,14 @@ def generate_briefing():
         
     except Exception as e:
         return jsonify({'error': f'Ollama generation failed: {str(e)}'}), 500
-# Continuation of app.py - Append this directly at the bottom to finalize the backend file
 
 @app.route('/api/decision/<int:item_id>', methods=['PUT'])
 def record_decision(item_id):
-    """Persists human acceptance, rejection, or structural modification edits to a specific bullet point."""
+    """Persists verification state inputs directly to your data rows."""
     data = request.json
-    decision = data.get('decision') # pending, accepted, rejected, edited
+    decision = data.get('decision')
     edited_text = data.get('edited_text', None)
     
-    if decision not in ['pending', 'accepted', 'rejected', 'edited']:
-        return jsonify({'error': 'Invalid decision state code supplied.'}), 400
-        
     with sqlite3.connect(DB_FILE) as conn:
         cursor = conn.cursor()
         cursor.execute(
@@ -165,38 +165,25 @@ def record_decision(item_id):
             (decision, edited_text, item_id)
         )
         conn.commit()
-        
     return jsonify({'message': 'User verification data persisted successfully.'}), 200
 
 @app.route('/api/briefings', methods=['GET'])
 def get_historical_briefings():
-    """Retrieves all past historical logs and associated decision metadata for system audit reviews."""
+    """Retrieves all past analytical logs for interface rendering tracks."""
     with sqlite3.connect(DB_FILE) as conn:
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
-        
         briefings = cursor.execute("SELECT * FROM briefings ORDER BY created_at DESC").fetchall()
         history = []
-        
         for b in briefings:
-            items = cursor.execute(
-                "SELECT * FROM briefing_items WHERE briefing_id = ?", (b['id'],)
-            ).fetchall()
-            
+            items = cursor.execute("SELECT * FROM briefing_items WHERE briefing_id = ?", (b['id'],)).fetchall()
             history.append({
                 'id': b['id'],
                 'created_at': b['created_at'],
                 'items': [dict(item) for item in items]
             })
-            
         return jsonify(history), 200
-@app.route('/')
-def serve_frontend():
-    """Serves the main Vue user interface document file directly from the workspace root."""
-    return send_file('index.html')
 
 if __name__ == '__main__':
     init_db()
     app.run(debug=True, port=5000)
-
-

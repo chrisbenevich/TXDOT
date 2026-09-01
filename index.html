@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Grounded Briefing Dashboard</title>
-    <!-- Seamless Vue 3 compilation layer loaded completely on the fly without accounts -->
-    <script src="https://unpkg.com"></script>
+    <!-- Vue 3 compilation engine loaded via CDN -->
+    <script src="vue.global.js"></script>
     <style>
         :root {
             --bg-dark: #121214;
@@ -20,6 +20,10 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
+        }
+        /* Prevents the raw template braces from flashing on screen */
+        [v-cloak] {
+            display: none !important;
         }
         .container {
             max-width: 1100px;
@@ -91,8 +95,8 @@
     </style>
 </head>
 <body>
-<!-- Continuation of index.html - Append this directly below the previous code block -->
-    <div id="app" class="container">
+    <!-- v-cloak hides raw variables until Vue engine initializes -->
+    <div id="app" class="container" v-cloak>
         <header>
             <h1>Grounded Technical Analysis Dashboard</h1>
             <p>TxDOT Systems Analyst III Data Ingestion Interface</p>
@@ -137,7 +141,7 @@
                         </span>
                     </div>
 
-                    <!-- Inline editing block capability switching -->
+                    <!-- Inline editing capability -->
                     <div v-if="item.user_decision !== 'edited'">
                         <p style="margin:5px 0;">{{ item.bullet_text }}</p>
                     </div>
@@ -159,7 +163,6 @@
             </div>
         </div>
     </div>
-<!-- Continuation of index.html - Append this at the bottom to close out the markup and scripts -->
     <script>
         const { createApp, ref, onMounted } = Vue
 
@@ -170,6 +173,9 @@
                 const historicalRecords = ref([])
                 const loading = ref(false)
 
+                // Absolute network endpoints linking directly to your backend server port
+                const BACKEND_URL = 'http://127.0.0.1:5000';
+
                 const uploadSourceDocuments = async () => {
                     const selectedFiles = fileField.value.files
                     if (selectedFiles.length === 0) return alert('Select files before trying to push.')
@@ -179,7 +185,7 @@
                         payload.append('files', selectedFiles[i])
                     }
 
-                    const res = await fetch('/api/upload', { method: 'POST', body: payload })
+                    const res = await fetch(`${BACKEND_URL}/api/upload`, { method: 'POST', body: payload })
                     const data = await res.json()
                     alert(data.message || data.error)
                 }
@@ -188,7 +194,7 @@
                     loading.value = true
                     activeBriefingItems.value = []
                     try {
-                        const res = await fetch('/api/generate', { method: 'POST' })
+                        const res = await fetch(`${BACKEND_URL}/api/generate`, { method: 'POST' })
                         const data = await res.json()
                         if (data.items) {
                             activeBriefingItems.value = data.items
@@ -213,7 +219,7 @@
 
                 const updateDecision = async (item, decisionValue) => {
                     item.user_decision = decisionValue
-                    await fetch(`/api/decision/${item.id}`, {
+                    await fetch(`${BACKEND_URL}/api/decision/${item.id}`, {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
@@ -224,8 +230,12 @@
                 }
 
                 const fetchSystemHistory = async () => {
-                    const res = await fetch('/api/briefings')
-                    historicalRecords.value = await res.json()
+                    try {
+                        const res = await fetch(`${BACKEND_URL}/api/briefings`)
+                        historicalRecords.value = await res.json()
+                    } catch (e) {
+                        console.log("Server unreachable on initialization check.")
+                    }
                 }
 
                 onMounted(() => {
