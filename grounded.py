@@ -1,6 +1,6 @@
 import os
 import sqlite3
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 import ollama
 
 app = Flask(__name__)
@@ -190,6 +190,10 @@ def get_historical_briefings():
             })
             
         return jsonify(history), 200
+@app.route('/')
+def serve_frontend():
+    """Serves the main Vue user interface document file directly from the workspace root."""
+    return send_file('index.html')
 
 if __name__ == '__main__':
     init_db()
