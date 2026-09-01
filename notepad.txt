@@ -1,3 +1,8 @@
+
+write substack on inadequate scope overengineering driving lack of AI ROI as pererlier thought leadership
+
+
+
 how to run, 
 
 architecture in a few sentences, 
@@ -8,17 +13,9 @@ which AI tools you used,
 
 1 stack
 2 borrow recommendation, detailed in known issues
-3 tradeoff due to using llm rather than strict .py classifier
-
 
 known issues.
 
-loom has 5min cap for free tier
-youtube could display my other videos thus privacy issue
-snipit has known crashing erros
-thus need to record in more than 1 file but within same session proveable with vid timestamps and also with laptop clock onscreen
-
-as with a live project not going to start over going to deal with this and make decision to continue in 4hr timeblock
 
 (
 ------------------------------
