@@ -1,0 +1,25 @@
+- [Narrator] Texas is growing at a fast pace and so are its transportation needs.
+0:055 secondsThe Texas Department of Transportation is constantly seeking new ways to keep construction inspections safe, efficient, and more accurate.
+0:1313 seconds- In this project, we evaluated unmanned aircraft systems, UASs, as they're commonly called select smartphones
+0:2121 secondsand underground gyroscopic technologies in aid of construction inspections.
+0:2626 secondsThis was done to understand where they work well, where they don't, and how they can better support the overall inspection process.
+0:3333 seconds- [Narrator] The Texas A&M Transportation Institute and TxDOT developed and tested innovative inspection technologies designed to be used on infrastructure projects.
+0:4343 seconds- Well, the issue that led to this research is the changing of technology and the fact that not only are we changing in technology,
+0:5353 secondsbut the growth of Texas as far as having the population change and the increase in our traveling public.
+0:5959 secondsSo that causes the requirement to be able to design and construct roadway projects much faster than what we had in the past.
+1:091 minute, 9 secondsAlso, more of a constraint on the limitations of be able to get out into the field
+1:171 minute, 17 secondsto be able to do such inspections to make sure that we are getting all of our utility partners involved into the project planning
+1:251 minute, 25 secondsand even still project design, we needed to have utilized the best technology that is available, so that's where this research come from.
+1:341 minute, 34 seconds- [Narrator] Adopting new devices such as drones and smartphones are changing how inspections are done, making the process more accessible for TxDOT teams across the state.
+1:441 minute, 44 seconds- So cameras on UASs and certain mobile devices produce geo-referenced outputs that include point clouds, meshes, ortho mosaics, and digital surface models.
+1:561 minute, 56 secondsThese let teams measure real world site conditions and track placements on construction sites.
+2:022 minutes, 2 secondsOn this project, we use the outputs to check geometry, spacing and the placement of facilities extract X, Y, Z coordinates
+2:112 minutes, 11 secondsin the real world, slopes and profiles and run volume calculations for material stockpiles.
+2:172 minutes, 17 seconds- [Narrator] TxDOT is developing guidance and protocols to enable districts across Texas to use new technologies for smarter information gathering with less burden on the driving public.
+2:272 minutes, 27 seconds- One of the products that was developed out of the research was a guide on how to utilize and how to get the best value out of using the technology.
+2:392 minutes, 39 secondsSo this will be shared with all the districts and also shared with all of our partners outside of TxDOT, all our external stakeholders.
+2:482 minutes, 48 secondsSo by sharing this data and sharing this information out there, we'll be able to implement a better program
+2:552 minutes, 55 secondsfor the utilization of smartphones and our unmanned aerial systems as well.
+3:023 minutes, 2 seconds- [Narrator] For more information and to find the publication for this project, please visit the TxDOT Research Library at the link shown below.
+
+Sync to video time

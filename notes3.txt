@@ -1,0 +1,39 @@
+Welcome to the connected and autonomous vehicle or CAV technology educational series presented by the Texas Department of Transportation.
+0:1111 secondsIn this video, we will introduce CAV technologies and how they operate in Texas today.
+0:1818 secondsTo be clear, even with connected and autonomous vehicles, driving today is still a hands on the wheel, eyes on the road activity for human drivers.
+0:2929 secondsFirst, let's define three commonly used terms in the transportation industry.
+0:3636 secondsConnected technology is a vehicle's ability to communicate with its environment, which may include sending and receiving information to the
+0:4444 secondsoriginal equipment manufacturer, transportation infrastructure, roadside [music] sensors, or other connected vehicles.
+0:5252 secondsAutomated technology allows a vehicle to [music] assist the human driver by performing part or all of a dynamic
+1:001 minutedriving task. Autonomous vehicles contain an automated driving system consisting of hardware and software
+1:081 minute, 8 secondscapable of driving without human intervention.
+1:111 minute, 11 secondsThe connected and autonomous vehicle industries [music] continue to make technological strides. While new advancements in the field provide
+1:191 minute, 19 secondsexciting opportunities for improvements to safety and mobility, testing continues to safely advance these emerging technologies.
+1:271 minute, 27 secondsYou may have a suite of technologies in your car [music] right now called ADAS or advanced driver assistance systems
+1:341 minute, 34 secondswhich can help a driver with tasks [music] like steering, braking, and parking. Examples of this are adaptive
+1:411 minute, 41 secondscruise control, lanekeeping assist, and automatic emergency braking. Adaptive cruise control maintains the vehicle's
+1:491 minute, 49 secondsspeed and adjusts the speed in response to vehicles ahead. Lane keeping assist provides corrective steering to keep a
+1:561 minute, 56 secondsvehicle centered in its lane. An automatic emergency braking activates the brakes when triggered. Or you may
+2:042 minutes, 4 secondshave seen fully autonomous ride share services. These vehicles are here in [music] Texas and it's important to understand their functions and why they
+2:122 minutes, 12 secondsare beneficial for safety, mobility, and economic opportunity.
+2:172 minutes, 17 secondsThere are many potential benefits to the implementation of CAV technologies, but the most important by far is safety.
+2:252 minutes, 25 secondsAccording to the National Highway Traffic Safety Administration, 94% of current crashes are primarily caused by driver related factors.
+2:352 minutes, 35 secondsCAVS can enhance safety by reducing human errors, including those caused by distracted drivers through automated
+2:422 minutes, 42 secondsbraking, lanekeeping assist, and collision avoidance systems.
+2:482 minutes, 48 secondsBy utilizing vehicle to everything or V2X technology, connected vehicles can detect [music] hazards in real time and
+2:552 minutes, 55 secondstake corrective action to prevent crashes, making roads safer for all users, including pedestrians.
+3:033 minutes, 3 secondsA survey from the New York City Department of Transportation showed that 83% of pedestrians felt safer when using
+3:103 minutes, 10 secondsa V2X enabled mobile pedestrian signal system, which guides users with vision disabilities across intersections.
+3:193 minutes, 19 secondsThe definitions discussed in this video were defined by national and statewide industry standards from organizations
+3:263 minutes, 26 secondssuch as the National Highway Traffic Safety Administration, the Society of Automotive Engineers, Partners for
+3:333 minutes, 33 secondsAutomated Vehicle Education, and many others. The National Highway Traffic Safety Administration demonstrates its
+3:413 minutes, 41 secondsdedication to saving lives on [music] our nation's roads and highways through its approach to the safe development, testing, and deployment of new and
+3:503 minutes, 50 secondsadvanced vehicle technologies that have enormous potential for improving safety and mobility for all Americans, including connected and automated vehicles.
+4:014 minutes, 1 secondWhile SAPE International is a leader in developing mobility standards and educating mobility professionals on CAVs, PAVE's goal is to inform the
+4:104 minutes, 10 secondspublic and bring them into the conversation.
+4:144 minutes, 14 secondsIn 2019, Governor Abbott of Texas [music] established the CAB task force to be led by Texot. This statewide task
+4:224 minutes, 22 secondsforce brings government and private industry together to collaborate on advancing CAV technologies with the goal
+4:294 minutes, 29 secondsof improving the safe movement of both people and goods. This group [music] will continue collaboration as new technology and elements are realized
+4:384 minutes, 38 secondsbringing further advancement and resources to CAVs.
+4:434 minutes, 43 secondsFor additional [music] resources and to learn more about CAVs and the task force, visit texot.gov gov and search connected and autonomous vehicles.
+4:544 minutes, 54 secondsIn the next videos, we will learn about connected [music] vehicles and automated vehicle technologies.

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grounded Briefing Dashboard</title>
+    <!-- Seamless Vue 3 compilation layer loaded completely on the fly without accounts -->
+    <script src="https://unpkg.com"></script>
+    <style>
+        :root {
+            --bg-dark: #121214;
+            --card-bg: #1e1e24;
+            --txdot-blue: #005A9C;
+            --cite-green: #2e7d32;
+            --invent-orange: #d84315;
+            --text-main: #e0e0e0;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        header {
+            border-bottom: 2px solid var(--txdot-blue);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+        .panel {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .file-input-group {
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: var(--txdot-blue);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        button:hover { opacity: 0.9; }
+        .bullet-card {
+            border-left: 6px solid #666;
+            background: #25252b;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .bullet-card.status-cited { border-left-color: var(--cite-green); }
+        .bullet-card.status-invented { border-left-color: var(--invent-orange); }
+        .tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        .tag-cited { background-color: var(--cite-green); }
+        .tag-invented { background-color: var(--invent-orange); }
+        .action-row {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        .btn-accept { background-color: #43a047; }
+        .btn-reject { background-color: #e53935; }
+        .btn-edit { background-color: #fdd835; color: black; }
+        .historical-block {
+            border-top: 1px solid #444;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<!-- Continuation of index.html - Append this directly below the previous code block -->
+    <div id="app" class="container">
+        <header>
+            <h1>Grounded Technical Analysis Dashboard</h1>
+            <p>TxDOT Systems Analyst III Data Ingestion Interface</p>
+        </header>
+
+        <div class="grid-layout">
+            <!-- Left Data Control Column -->
+            <div class="panel">
+                <h3>Document Ingestion</h3>
+                <div class="file-input-group">
+                    <input type="file" ref="fileField" multiple accept=".txt" style="margin-bottom:10px; display:block;">
+                    <button @click="uploadSourceDocuments">Upload Text Logs</button>
+                </div>
+                <hr style="border-color:#444;">
+                <button @click="generateBriefingData" style="width:100%; margin-top:10px; padding:15px;">
+                    Run Verification Pipeline
+                </button>
+
+                <h3 style="margin-top:40px;">Historical Sessions</h3>
+                <div v-for="archive in historicalRecords" :key="archive.id" class="historical-block">
+                    <small>Session Run: {{ archive.created_at }}</small>
+                    <div style="font-size:0.85rem; color:#aaa; margin-top:5px;">
+                        Items Processed: {{ archive.items.length }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Verification & Content Analysis Column -->
+            <div class="panel">
+                <h3>Active Briefing Verification Window</h3>
+                <div v-if="loading" style="color:#fdd835;">Analyzing data streams via local Ollama core node...</div>
+                
+                <div v-if="activeBriefingItems.length === 0 && !loading" style="color:#888;">
+                    No operational metrics compiled. Select files and initiate the pipeline processing execution loop.
+                </div>
+
+                <div v-for="item in activeBriefingItems" :key="item.id" class="bullet-card" :class="'status-' + item.status">
+                    <div>
+                        <span class="tag" :class="'tag-' + item.status">{{ item.status }}</span>
+                        <span v-if="item.citation_source" style="font-size:0.8rem; color:#aaa; margin-left:10px;">
+                            Source: {{ item.citation_source }}
+                        </span>
+                    </div>
+
+                    <!-- Inline editing block capability switching -->
+                    <div v-if="item.user_decision !== 'edited'">
+                        <p style="margin:5px 0;">{{ item.bullet_text }}</p>
+                    </div>
+                    <div v-else>
+                        <input v-model="item.bullet_text" style="width:100%; padding:8px; margin:5px 0; background:#333; color:white; border:1px solid #555;">
+                    </div>
+
+                    <div class="action-row">
+                        <button class="btn-accept" @click="updateDecision(item, 'accepted')">Accept</button>
+                        <button class="btn-reject" @click="updateDecision(item, 'rejected')">Reject</button>
+                        <button class="btn-edit" @click="toggleEditMode(item)">
+                            {{ item.user_decision === 'edited' ? 'Save Edit' : 'Edit Line' }}
+                        </button>
+                        <span style="margin-left:auto; font-size:0.85rem; align-self:center; font-style:italic; color:#aaa;">
+                            Status: {{ item.user_decision }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Continuation of index.html - Append this at the bottom to close out the markup and scripts -->
+    <script>
+        const { createApp, ref, onMounted } = Vue
+
+        createApp({
+            setup() {
+                const fileField = ref(null)
+                const activeBriefingItems = ref([])
+                const historicalRecords = ref([])
+                const loading = ref(false)
+
+                const uploadSourceDocuments = async () => {
+                    const selectedFiles = fileField.value.files
+                    if (selectedFiles.length === 0) return alert('Select files before trying to push.')
+                    
+                    const payload = new FormData()
+                    for (let i = 0; i < selectedFiles.length; i++) {
+                        payload.append('files', selectedFiles[i])
+                    }
+
+                    const res = await fetch('/api/upload', { method: 'POST', body: payload })
+                    const data = await res.json()
+                    alert(data.message || data.error)
+                }
+
+                const generateBriefingData = async () => {
+                    loading.value = true
+                    activeBriefingItems.value = []
+                    try {
+                        const res = await fetch('/api/generate', { method: 'POST' })
+                        const data = await res.json()
+                        if (data.items) {
+                            activeBriefingItems.value = data.items
+                        } else {
+                            alert(data.error)
+                        }
+                    } catch (e) {
+                        alert('System timeout checking model.')
+                    } finally {
+                        loading.value = false
+                        fetchSystemHistory()
+                    }
+                }
+
+                const toggleEditMode = async (item) => {
+                    if (item.user_decision === 'edited') {
+                        updateDecision(item, 'edited')
+                    } else {
+                        item.user_decision = 'edited'
+                    }
+                }
+
+                const updateDecision = async (item, decisionValue) => {
+                    item.user_decision = decisionValue
+                    await fetch(`/api/decision/${item.id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            decision: decisionValue,
+                            edited_text: decisionValue === 'edited' ? item.bullet_text : null
+                        })
+                    })
+                }
+
+                const fetchSystemHistory = async () => {
+                    const res = await fetch('/api/briefings')
+                    historicalRecords.value = await res.json()
+                }
+
+                onMounted(() => {
+                    fetchSystemHistory()
+                })
+
+                return {
+                    fileField,
+                    activeBriefingItems,
+                    historicalRecords,
+                    loading,
+                    uploadSourceDocuments,
+                    generateBriefingData,
+                    toggleEditMode,
+                    updateDecision
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>
