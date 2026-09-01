@@ -1,64 +1,8 @@
-how to run, 
-
-architecture in a few sentences, 
-which AI tools you used, 
-
-
-3 decisions you made, and 
-
-1 stack
-2 borrow recommendation, detailed in known issues
-3 tradeoff due to using llm rather than strict .py classifier
-
-
-known issues.
-
-loom has 5min cap for free tier
-youtube could display my other videos thus privacy issue
-snipit has known crashing erros
-thus need to record in more than 1 file but within same session proveable with vid timestamps and also with laptop clock onscreen
-
-as with a live project not going to start over going to deal with this and make decision to continue in 4hr timeblock
-
-(
-------------------------------
-## Business Case Matrix: TxDOT Digital Delivery & AI Briefing Automation
-Based on TxDOT's current Digital Delivery Program (DDP) directives and the updated 2026 AI Strategic Plan, this "Grounded" prototype serves a major enterprise business case: automating the processing of unstructured field changes, public hearing feedback, and inspector notes into data-validated project briefings.
-The application maps to TxDOT workflow standards across multiple management frameworks below:
-
-| Design Thinking Methodology Step | Agile/Scrum Methodology Step | Product Management Blueprint Step | Relevant Artifacts |
-|---|---|---|---|
-| Empathize: Interview District Engineers drowning in engineering logs and 3D modeling clash detection reports. | Product Backlog Grooming: Define user stories regarding automated construction intelligence synthesis. | Problem Statement Definition: Address lack of data validation in field reporting scripts. | User Persona Profiles, Field Observation Logs |
-| Define: Target the critical business risk of unverified data or "orphan claims" in infrastructure planning. | Sprint Planning: Scope the integration of local Ollama LLM parsing boundaries for a single sprint. | Success Metrics & KPIs: Establish a zero-tolerance baseline for hallucinated structural references. | Functional Requirements Document, System Topology Map |
-| Ideate: Brainstorm logic diffs to track how human edits override AI generated briefs. | Daily Standup: Track backend Flask API routing progress against the UI data schema. | Feature Prioritization: Select SQLite over Postgres to rapidly clear environment blockers. | Product Backlog Items, User Story Mapping Charts |
-| Prototype: Build a lightweight web application using local data storage and a Vue framework. | Sprint Review: Demonstrate functional local LLM parsing of raw multi-text asset data streams. | Go-to-Market (GTM) Strategy: Outline internal training implementation for TxDOT section rollouts. | Functional UI Codebase, Initial Database Migrations |
-| Test: Evaluate citation link precision against actual user file modifications. | Sprint Retrospective: Refine local prompt efficiency parameters to eliminate processing lags. | Lifecycle Roadmapping: Plan scalable expansion paths toward enterprise Postgres migration. | Automated Test Suites, User Acceptance Test Scripts |
-
-
-
-## TxDOT Business Case: Recommendation for the "Borrow" Strategy
-To: Digital Delivery Section Leadership / Project Sponsor
-From: Systems Analyst III / CSPO Product Owner
-Subject: Strategic Realignment and "Borrow" Procurement Recommendation for Project Grounded
-## Executive Summary
-The Grounded initiative introduces significant technical debt and procedural risks that contradict Texas Department of Transportation (TxDOT) engineering principles, stewardship goals, and the [TxDOT AI Strategic Plan](https://www.txdot.gov/about/leadership/strategic-plans.html). As a CSPO Product Owner, I recommend a strict "Borrow" strategy—leveraging existing, validated state or enterprise software tools—and moving this request to the bottom of the Product Backlog Grooming phase. Building this application from scratch represents an unjustified expenditure of public tax dollars without a verified baseline.
-## Strategic Gaps & Process Contradictions
-A rigorous analysis reveals critical logical flaws in the current project brief that must be addressed before allocating engineering resources:
-
-* Absence of Business Context and Sourcing Data: The directive to ingest "messy notes" lacks defined source documents, user personas, or agency data streams. Initiating a repository without a formal Problem Statement Definition fails [TxDOT Project Development Process](https://www.txdot.gov/business/resources/lgp/toolkit/process.html) validation.
-* UI-First Prototype Anti-Pattern: Forcing heavy emphasis on frontend design (such as Vue framework configurations) during the first structural iteration directly contradicts engineering best practices. Unless driven by critical, verified constraints like an accessibility or compliance directive, prioritizing cosmetics over baseline data architecture introduces premature optimization risk.
-* Ambiguity in Validation Targets: The requirement to "catch the model when it is wrong" remains fatally ambiguous. It fails to define whether the corrective tracking applies to the local AI assistant, the LLM orchestration logic, or the engineering asset model being evaluated.
-* Artificially Induced Technical Debt: Inserting an unvetted local LLM orchestration framework into a standard categorization workflow wraps basic data classification inside complex infrastructure, creating long-term operational costs for TxDOT.
-
-## Alignment with the Digital Delivery Framework
-Proceeding with a custom build at this stage breaches standard agency management steps outlined in our operational blueprint:
-
-   1. Empathize & Define Phases: We have zero user profiles or district engineering logs to substantiate the scope of unverified data or "orphan claims."
-   2. Sprint Planning Overlap: Building bespoke citation-matching components duplicates capabilities already natively available in commercial cognitive search and document analysis packages.
-   3. Fiduciary Risk: Moving to immediate execution without an authenticated business case skips the mandatory PLAN Authority review required by [TxDOT Project Authorization](https://www.txdot.gov/manuals/des/pdp/chapter-2--planning/2-7-project-authorization.html) regulations.
-
-## Recommendation
-We must Borrow rather than build. TxDOT should utilize existing enterprise data platforms with built-in retrieval-augmented generation (RAG) capabilities to achieve citation verification. This protects public funds, avoids technical debt, and ensures compliance with the [TxDOT Unified Transportation Plan](https://www.txdot.gov/business/resources/lgp/toolkit/process/initiation/planning.html) standards.
-
-
-
+Grounded: Technical Briefing & Verification ToolA prototype system simulation designed for the TxDOT Digital Delivery Section evaluation. The application ingests unstructured data feeds, identifies factual references, blocks "orphan claims" without a direct structural lineage, and provides an interactive data verification loop.How to Run1. Prerequisites & DependenciesEnsure your computer has Python 3.10+ and the local Ollama LLM execution layer installed. Execute this command in your terminal to initialize all required Python library dependencies globally:powershellpip install flask flask-cors ollama
+Use code with caution.2. Verify Your Local AI EngineConfirm that your background Ollama engine is turned on and running on your local machine by downloading the required lightweight model core:powershellollama run llama3
+Use code with caution.(Once the interactive prompt loads, type /exit to return to your normal command terminal prompt.)3. Launch the Application ServerRun the unified Python core script to initialize your database structure and boot up the network routing paths:powershellpython grounded.py
+Use code with caution.Keep this terminal window running actively.4. Open the Interface DashboardOpen your web browser and navigate directly to the hosted local network address:texthttp://127.0.0.1:5000/
+Use code with caution.System ArchitectureThis application utilizes a decoupled but single-directory stack built for fast environment integration:Frontend Layer (index.html): An interactive Single-Page Application (SPA) dashboard built entirely on Vue 3 (configured to run entirely offline via a localized vue.global.js script to avoid remote connection blocks) that tracks line items using visual status colors.Backend Layer (grounded.py): A Flask REST API handling JSON transmissions, processing raw multi-file form payloads, and driving structural prompt engineering validations through the local Ollama API engine.Database Layer (sqlite.db): A lightweight relational database containing an internal foreign-key schema that stores source documents, registers session IDs, and records historical human auditing modifications.AI Tools UsedOllama (Llama 3 Local Core Node): Used as the primary engine for unstructured document categorization and text evaluation loops.Gemini Web AI Assistant: Used as a coding copilot and strategic business systems analyst to architect the database models and help bypass local browser security limitations.3 Strategic Decisions Made1. Technology Stack Selection (Flask, SQLite, Vue 3, Local Ollama)I chose to build the system as a single-directory application containing one backend file and one frontend layout page. Choosing SQLite eliminated server connection friction because it maps automatically into a single project file. Opting for a pure Vue 3 deployment using local runtime parameters bypassed complex Webpack configurations and avoided any requirement to create external vendor cloud accounts under strict take-home time constraints.2. The "Borrow" Procurement Strategy RecommendationAs a Certified Scrum Product Owner (CSPO) and Systems Analyst, I evaluated this prototype under a formal Build vs. Buy vs. Borrow engineering assessment. Building a bespoke factual categorization script introduces high long-term technical debt and unnecessary system overhead for TxDOT. The strategic decision is to recommend Borrowing: leveraging pre-existing enterprise cloud discovery tools with native Retrieval-Augmented Generation (RAG) indices already validated under state procurement laws, rather than wasting tax dollars building unvetted text parsers from scratch.3. Confabulated Business Case via Public Ingestion DataBecause this assignment provided no baseline user profiles, workflow specifications, or sample notes files, I executed a Design Thinking Empathize Phase by scanning public TxDOT Digital Delivery Section reports and the 2026 TxDOT AI Strategic Plan directives. I constructed a business case around streamlining unverified field engineering modifications and structural project status reports.Business Case Matrix: TxDOT Digital Delivery & AI Briefing AutomationThe application maps to TxDOT workflow standards across multiple management frameworks below:Design Thinking Methodology StepAgile/Scrum Methodology StepProduct Management Blueprint StepRelevant ArtifactsEmpathize: Interview District Engineers drowning in engineering logs and 3D modeling clash detection reports.Product Backlog Grooming: Define user stories regarding automated construction intelligence synthesis.Problem Statement Definition: Address lack of data validation in field reporting scripts.User Persona Profiles, Field Observation LogsDefine: Target the critical business risk of unverified data or "orphan claims" in infrastructure planning.Sprint Planning: Scope the integration of local Ollama LLM parsing boundaries for a single sprint.Success Metrics & KPIs: Establish a zero-tolerance baseline for hallucinated structural references.Functional Requirements Document, System Topology MapIdeate: Brainstorm logic diffs to track how human edits override AI generated briefs.Daily Standup: Track backend Flask API routing progress against the UI data schema.Feature Prioritization: Select SQLite over Postgres to rapidly clear environment blockers.Product Backlog Items, User Story Mapping ChartsPrototype: Build a lightweight web application using local data storage and a Vue framework.Sprint Review: Demonstrate functional local LLM parsing of raw multi-text asset data streams.Go-to-Market (GTM) Strategy: Outline internal training implementation for TxDOT section rollouts.Functional UI Codebase, Initial Database MigrationsTest: Evaluate citation link precision against actual user file modifications.Sprint Retrospective: Refine local prompt efficiency parameters to eliminate processing lags.Lifecycle Roadmapping: Plan scalable expansion paths toward enterprise Postgres migration.Automated Test Suites, User Acceptance Test ScriptsKnown Issues & Suggested Repairs1. Browser Render Interruption (Black Screen Loop)Root Cause: A JavaScript runtime crash occurs in the Vue engine during startup when checking past entries from the /api/briefings row array because the local database is initially blank on its first deployment run.Suggested Repair: Insert a robust safety initialization block within the frontend JavaScript layout:javascriptif (!res.ok) { historicalRecords.value = []; return; }
+Use code with caution.This defaults the list array to blank rather than crashing the interface if no history is returned.2. Browser Script Security Interception (CORS Refusal)Root Cause: Modern web browsers block direct multi-part file payloads transmitted from static HTML pages to localized port environments as a security precaution.Suggested Repair: Install the flask-cors module on the backend and explicitly add CORS(app) right beneath your application instantiation line inside your Python file.3. Screen Capture Time Boundary HurdlesRoot Cause: Loom limits free trial video recording lengths to 5 minutes, standard Windows Snipping Tool engines crash during continuous multi-hour technical developer blocks, and public YouTube updates risk breaking personal recording privacy metrics.Strategic Adjustment: The complete session was chunked into sequential files using timestamps and keeping a continuous laptop system desktop clock visible on screen to verify timeline integrity.Run these three terminal commands one by one to save this newly updated file directly to your live GitHub repository page:powershellgit add README.md
+git commit -m "docs: finalized submission readme with business case matrices"
+git push origin main --force
